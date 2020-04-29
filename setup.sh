@@ -38,26 +38,26 @@ function provision {
         exit $result
     fi
 
-    local id
-    id=$(grep "Instance created - ID" <<< "$output" | awk -F " : " '{print $2}')
-    if [ -z "$id" ]; then
+    local __id
+    __id=$(grep "Instance created - ID" <<< "$output" | awk -F " : " '{print $2}')
+    if [ -z "$__id" ]; then
         echo "Could not find instance ID" >&2
         exit 1
     fi
 
-    local internal_ip
-    internal_ip=$(vultr-cli server info "$id" | grep "Internal IP" | awk '{print $3}')
-    if [ -z "$internal_ip" ]; then
+    local __ip
+    __ip=$(vultr-cli server info "$__id" | grep "Internal IP" | awk '{print $3}')
+    if [ -z "$__ip" ]; then
         echo "Could not find internal IP" >&2
         exit 1
     fi
 
     if [[ "$__result_ip" ]]; then
-        eval "$__result_ip=$internal_ip"
+        eval "$__result_ip=$__ip"
     fi
 
     if [[ "$__result_id" ]]; then
-        eval "$__result_id=$id"
+        eval "$__result_id=$__id"
     fi
 }
 
