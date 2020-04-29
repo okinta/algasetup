@@ -74,7 +74,7 @@ function start_iqfeed {
     ip=
     id=
     provision iqfeed no-wait ip id
-    echo "Began provision for IQFeed. Waiting for port to open."
+    echo "Began provision for IQFeed ($id). Waiting for port to open."
 
     if wait-for-it -t $TIMEOUT "$ip:9400"; then
         echo "IQFeed is ready"
