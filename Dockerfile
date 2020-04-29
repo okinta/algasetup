@@ -4,6 +4,7 @@ RUN apk add --no-cache \
         bash \
         curl \
         openssh-client \
+        su-exec \
         tini \
         unzip
 
@@ -33,9 +34,8 @@ RUN wget -q -O alga-infra.zip \
     && rm -f alga-infra.zip
 
 RUN adduser -D regan
-COPY entrypoint.sh /entrypoint.sh
-COPY setup.sh /setup.sh
-RUN chmod o+x /entrypoint.sh
-RUN chmod o+x /setup.sh
-ENTRYPOINT ["/sbin/tini", "--", "/entrypoint.sh"]
+COPY / /app
+WORKDIR /app
+RUN chmod o+x *.sh
+ENTRYPOINT ["/sbin/tini", "--", "/app/entrypoint.sh"]
 CMD ["setup"]
