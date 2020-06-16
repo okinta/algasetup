@@ -34,8 +34,7 @@ RUN wget -q -O alga-infra.zip \
     && rm -f alga-infra.zip
 
 RUN adduser -D regan
-COPY / /app
-WORKDIR /app
-RUN chmod o+x *.sh
-ENTRYPOINT ["/sbin/tini", "--", "/app/entrypoint.sh"]
+COPY files /
+WORKDIR /usr/local/bin
+ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
 CMD ["setup"]
