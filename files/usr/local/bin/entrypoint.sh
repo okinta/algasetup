@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 mkdir /infra
-wget https://raw.githubusercontent.com/okinta/alga-infra/master/infra/alga.yaml \
-    /infra/alga.yaml
+wget -O /infra/alga.yaml \
+    https://raw.githubusercontent.com/okinta/alga-infra/master/infra/alga.yaml
 
 if [ "$1" = "setup" ]; then
     exec agrix provision /infra/alga.yaml
