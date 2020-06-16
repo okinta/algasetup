@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-PLATFORM_API_KEY
 PLATFORM_API_KEY=$(wget -q -O - http://vault.in.okinta.ge:7020/api/kv/vultr_api_key)
 if [ -z "$PLATFORM_API_KEY" ]; then
     echo "Could not obtain Vultr API key from Vault" >&2
